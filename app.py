@@ -64,3 +64,15 @@ def query():
         response_string += "</tr>"
     response_string += "</table>"
     return response_string
+
+
+@app.route('/db_drop')
+def drop():
+    conn = psycopg.connect("postgresql://flask_postgres_pesc3485_user:lbcH2gmgGSjMYwgEoLQGrSKVv4kUsnLp@dpg-d44m7ti4d50c73ek31mg-a.oregon-postgres.render.com/flask_postgres_pesc3485")
+    cur = conn.cursor()
+    cur.execute('''
+                DROP TABLE Basketball;                        
+                ''')
+    conn.commit()
+    conn.close()
+    return "Basketball Table Dropped"
